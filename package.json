@@ -14,6 +14,7 @@
     "db:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.69.0",
     "better-auth": "^1.2.4",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.40.1",
