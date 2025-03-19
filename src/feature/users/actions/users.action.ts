@@ -1,18 +1,16 @@
+"use server";
+
 import { IResponse } from "@/common/types/response.type";
 import { usersService } from "../services/users.service";
 import { IUsers } from "../types/users.type";
+import { createAuthAction } from "@/lib/server-action";
 
-const getAllUsers = async (): Promise<IResponse<IUsers[]>> => {
-  try {
-    const users = await usersService.findAll();
-    return { data: users };
-  } catch (error) {
-    console.error(error);
-    return { data: [], error: { message: "Something went wrong" } };
-  }
-};
+export const getAllUsers = createAuthAction<IResponse<IUsers[]>>(async () => {
+  const users = await usersService.findAll();
+  return { data: users };
+});
 
-const getUserById = async (
+export const getUserById = async (
   id: string
 ): Promise<IResponse<IUsers | null>> => {
   try {
@@ -22,9 +20,4 @@ const getUserById = async (
     console.error(error);
     return { data: null, error: { message: "Something went wrong" } };
   }
-};
-
-export const usersAction = {
-  getAllUsers,
-  getUserById,
 };
